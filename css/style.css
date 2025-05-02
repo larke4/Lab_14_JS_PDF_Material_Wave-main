@@ -1,0 +1,375 @@
+/* src/css/style.css */
+
+/* Базовые сбросы и настройки */
+:root {
+  --primary-color: #28D979;
+  --secondary-color: #F0F0F0;
+  --dark-color: #000000;
+  --light-color: #FFFFFF;
+  --text-color: #3F3D3D;
+  --text-light: #5C5C5C;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  color: var(--text-color);
+}
+
+/* Основной контейнер резюме */
+.cv {
+  position: relative;
+  width: 595px; /* A4 ширина в пикселях */
+  height: 842px; /* A4 высота в пикселях */
+  background: var(--light-color);
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+/* Bento-сетка */
+.bentoFlexbox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+  padding: 20px;
+  gap: 20px;
+  width: 100%;
+  height: 100%;
+}
+
+/* Общие стили для блоков */
+.box {
+  background: var(--secondary-color);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.box-title {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+  color: var(--dark-color);
+  margin-bottom: 16px;
+}
+
+/* Блок с фото профиля */
+.profile-img {
+  width: 124px;
+  height: 124px;
+  background: #ddd url('') no-repeat center;
+  background-size: cover;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* Блок с именем */
+.name-box {
+  width: 124px;
+  height: 124px;
+  background: var(--secondary-color);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px;
+}
+
+.greeting {
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 150%;
+  color: var(--text-color);
+}
+
+.name {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 104%;
+  color: var(--dark-color);
+}
+
+.role {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 150%;
+  color: var(--text-light);
+}
+
+/* Блок с языками */
+.languages-box {
+  width: 267px;
+  min-height: 124px;
+}
+
+.language {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.language-name {
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 104%;
+  color: var(--dark-color);
+  width: 60px;
+}
+
+.progress-bar {
+  height: 11px;
+  background: var(--primary-color);
+  border-radius: 3px;
+  flex-grow: 1;
+}
+
+/* Блок с опытом работы */
+.experience-box {
+  width: 411px;
+  min-height: 359px;
+}
+
+.job {
+  background: var(--light-color);
+  border-radius: 10px;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.job.last {
+  background: var(--primary-color);
+  color: var(--light-color);
+}
+
+.job-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.job-date {
+  font-weight: 500;
+  font-size: 8px;
+  line-height: 150%;
+}
+
+.job-role {
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 150%;
+  margin-bottom: 4px;
+}
+
+.job-company {
+  font-weight: 400;
+  font-size: 8px;
+  line-height: 150%;
+}
+
+.job-points {
+  font-weight: 400;
+  font-size: 8px;
+  line-height: 150%;
+}
+
+/* Блок с инструментами */
+.tools-box {
+  width: 124px;
+  min-height: 359px;
+  position: relative;
+}
+
+.tool-category {
+  background: var(--light-color);
+  border-radius: 6px;
+  padding: 16px 4px;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.tool-tag {
+  position: absolute;
+  top: -5px;
+  left: 10px;
+  background: var(--dark-color);
+  color: var(--light-color);
+  border-radius: 59px;
+  padding: 2px 6px;
+  font-size: 5px;
+}
+
+.tool-icon {
+  width: 20px;
+  height: 20px;
+  margin: 8px;
+  display: inline-block;
+  background: #ddd;
+  border-radius: 4px;
+}
+
+/* Блок с образованием */
+.education-box {
+  width: 268px;
+  min-height: 289px;
+}
+
+.education {
+  background: var(--light-color);
+  border-radius: 10px;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.education.last {
+  background: var(--primary-color);
+  color: var(--light-color);
+}
+
+/* Блок с интересами */
+.interests-box {
+  width: 267px;
+  min-height: 177px;
+}
+
+.interest-tag {
+  display: inline-block;
+  background: var(--light-color);
+  border-radius: 40px;
+  padding: 4px 10px;
+  margin: 0 8px 8px 0;
+  font-size: 10px;
+}
+
+/* Блок с контактами */
+.contact-box {
+  width: 267px;
+  min-height: 92px;
+  background: var(--dark-color);
+  color: var(--light-color);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.contact-title {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+  margin-bottom: 8px;
+}
+
+.contact-info {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 150%;
+  color: #DDDDDD;
+  margin-bottom: 4px;
+}
+
+/* Кнопка скачивания */
+.download-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background: var(--primary-color);
+  color: var(--light-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.download-btn:hover {
+  background: #1fb863;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Эффект Material Ripple */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform .5s, opacity 1s;
+}
+
+.ripple:active:after {
+  transform: scale(0, 0);
+  opacity: .3;
+  transition: 0s;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* Редактируемые элементы */
+[contenteditable="true"] {
+  outline: 1px dashed #ccc;
+  padding: 2px;
+  border-radius: 3px;
+  min-height: 1em;
+}
+
+[contenteditable="true"]:focus {
+  outline: 2px solid var(--primary-color);
+  background: rgba(40, 217, 121, 0.1);
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
+  .cv {
+    width: 100%;
+    height: auto;
+  }
+  
+  .bentoFlexbox {
+    flex-direction: column;
+  }
+  
+  .box {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
