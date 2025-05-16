@@ -3,184 +3,251 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Резюме Георгия | Frontend Developer</title>
+  <title>Интерактивное резюме | Георгий</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./css/style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
   <style>
-    /* Дополнительные стили для правильного позиционирования */
-    .cv-container {
-      position: relative;
-      width: 595px;
-      height: 842px;
+    /* Дополнительные стили для редактируемых полей */
+    [contenteditable="true"] {
+      border-bottom: 1px dashed #ccc;
+      padding: 2px 4px;
+      margin: 2px 0;
+      border-radius: 3px;
+      min-width: 50px;
+      display: inline-block;
+    }
+    
+    [contenteditable="true"]:focus {
+      outline: none;
+      background: rgba(40, 217, 121, 0.1);
+      border-bottom: 2px solid #28D979;
     }
     
     .download-btn {
-      position: absolute;
-      right: 20px;
-      bottom: 20px;
-      z-index: 100;
-      padding: 10px 20px;
+      position: fixed;
+      right: 30px;
+      bottom: 30px;
+      padding: 12px 24px;
       background: #28D979;
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
-      font-weight: 500;
-      transition: all 0.3s;
+      font-weight: 600;
+      font-size: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+      z-index: 1000;
     }
     
     .download-btn:hover {
       background: #1fb863;
       transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    }
+    
+    .progress-bar {
+      transition: width 0.5s ease;
+    }
+
+    .tool-icon {
+      width: 24px;
+      height: 24px;
+      margin: 4px;
+      object-fit: contain;
     }
   </style>
 </head>
 <body>
   <div class="cv-container">
     <div class="cv" id="resume-content">
-      <!-- Bento-сетка -->
       <div class="bentoFlexbox">
         <!-- Блок с фото -->
-        <div class="box profile-img" style="background-image: url('./assets/foto.jpg')"></div>
+        <div class="box profile-img" style="background-image: url('./assets/foto.jpg')" contenteditable="false"></div>
         
         <!-- Блок с именем -->
         <div class="box name-box">
-          <p class="greeting">Привет, я</p>
-          <h1 class="name">Георгий</h1>
-          <p class="role">Frontend Developer</p>
+          <p class="greeting" contenteditable="true">Привет, я</p>
+          <h1 class="name" contenteditable="true">Георгий</h1>
+          <p class="role" contenteditable="true">Frontend Developer</p>
         </div>
         
         <!-- Блок с языками -->
         <div class="box languages-box">
-          <h3 class="box-title">Языки</h3>
+          <h3 class="box-title" contenteditable="true">Языки</h3>
           <div class="language">
-            <span class="language-name">Русский</span>
+            <span class="language-name" contenteditable="true">Русский</span>
             <div class="progress-bar" style="width: 100%"></div>
           </div>
           <div class="language">
-            <span class="language-name">Английский</span>
+            <span class="language-name" contenteditable="true">Английский</span>
             <div class="progress-bar" style="width: 80%"></div>
           </div>
           <div class="language">
-            <span class="language-name">JavaScript</span>
+            <span class="language-name" contenteditable="true">JavaScript</span>
             <div class="progress-bar" style="width: 90%"></div>
           </div>
         </div>
         
         <!-- Блок с опытом работы -->
-       <div class="box experience-box">
-  <h3 class="box-title">Опыт работы</h3>
-  <div class="job">
-    <div class="job-top">
-      <span class="job-date">2022 - Настоящее время</span>
-    </div>
-    <h4 class="job-role">Frontend Developer</h4>
-    <p class="job-company">Компания "ВебТех"</p>
-    <ul class="job-points" style="margin-left: 20px; padding-left: 15px;">
-      <li>Разработка SPA на React/Vue</li>
-      <li>Оптимизация производительности</li>
-      <li>Интеграция с REST API</li>
-    </ul>
-  </div>
-  <div class="job last">
-    <div class="job-top">
-      <span class="job-date">2020 - 2022</span>
-    </div>
-            <h4 class="job-role">Junior Web Developer</h4>
-            <p class="job-company">Студия "ДизайнВеб"</p>
+        <div class="box experience-box">
+          <h3 class="box-title" contenteditable="true">Опыт работы</h3>
+          <div class="job">
+            <div class="job-top">
+              <span class="job-date" contenteditable="true">2022 - Настоящее время</span>
+            </div>
+            <h4 class="job-role" contenteditable="true">Frontend Developer</h4>
+            <p class="job-company" contenteditable="true">Компания "ВебТех"</p>
+            <ul class="job-points" style="margin-left: 20px; padding-left: 15px;">
+              <li contenteditable="true">Разработка SPA на React/Vue</li>
+              <li contenteditable="true">Оптимизация производительности</li>
+              <li contenteditable="true">Интеграция с REST API</li>
+            </ul>
+          </div>
+          <div class="job last">
+            <div class="job-top">
+              <span class="job-date" contenteditable="true">2020 - 2022</span>
+            </div>
+            <h4 class="job-role" contenteditable="true">Junior Web Developer</h4>
+            <p class="job-company" contenteditable="true">Студия "ДизайнВеб"</p>
           </div>
         </div>
         
         <!-- Блок с инструментами -->
         <div class="box tools-box">
-          <h3 class="box-title">Инструменты</h3>
+          <h3 class="box-title" contenteditable="true">Инструменты</h3>
           <div class="tool-category">
             <span class="tool-tag">Frontend</span>
-            <img src="./assets/javascript.svg" class="tool-icon" alt="JavaScript">
-            <img src="./assets/figma.jpg" class="tool-icon" alt="Figma">
-            <img src="./assets/c.png" class="tool-icon" alt="CSS3">
+            <div style="display: flex; flex-wrap: wrap;">
+              <img src="./assets/javascript.svg" class="tool-icon" alt="JavaScript" title="JavaScript">
+              <img src="./assets/figma.jpg" class="tool-icon" alt="Figma" title="Figma">
+              <img src="./assets/c.png" class="tool-icon" alt="CSS3" title="CSS3">
+            </div>
           </div>
-          <div class="tool-category">
+          <div class="tool-category" style="margin-top: 15px;">
             <span class="tool-tag">Backend</span>
-            <img src="./assets/python.png" class="tool-icon" alt="Python">
-            <img src="./assets/ChatGPT_logo.svg.png" class="tool-icon" alt="ChatGPT">
+            <div style="display: flex; flex-wrap: wrap;">
+              <img src="./assets/python.png" class="tool-icon" alt="Python" title="Python">
+              <img src="./assets/ChatGPT_logo.svg.png" class="tool-icon" alt="ChatGPT" title="ChatGPT">
+            </div>
           </div>
         </div>
         
         <!-- Блок с образованием -->
         <div class="box education-box">
-          <h3 class="box-title">Образование</h3>
+          <h3 class="box-title" contenteditable="true">Образование</h3>
           <div class="education">
             <div class="job-top">
-              <span class="job-date">2016 - 2020</span>
+              <span class="job-date" contenteditable="true">2016 - 2020</span>
             </div>
-            <h4 class="job-role">Бакалавр Компьютерных наук</h4>
-            <p class="job-company">Технический Университет</p>
+            <h4 class="job-role" contenteditable="true">Бакалавр Компьютерных наук</h4>
+            <p class="job-company" contenteditable="true">Технический Университет</p>
           </div>
           <div class="education last">
             <div class="job-top">
-              <span class="job-date">2020 - 2022</span>
+              <span class="job-date" contenteditable="true">2020 - 2022</span>
             </div>
-            <h4 class="job-role">Магистр Веб-технологий</h4>
+            <h4 class="job-role" contenteditable="true">Магистр Веб-технологий</h4>
           </div>
         </div>
         
         <!-- Блок с интересами -->
         <div class="box interests-box">
-          <h3 class="box-title">Интересы</h3>
+          <h3 class="box-title" contenteditable="true">Интересы</h3>
           <div>
-            <span class="interest-tag">Программирование</span>
-            <span class="interest-tag">Дизайн</span>
-            <span class="interest-tag">Фотография</span>
-            <span class="interest-tag">Путешествия</span>
-            <span class="interest-tag">ИИ технологии</span>
+            <span class="interest-tag" contenteditable="true">Программирование</span>
+            <span class="interest-tag" contenteditable="true">Дизайн</span>
+            <span class="interest-tag" contenteditable="true">Фотография</span>
+            <span class="interest-tag" contenteditable="true">Путешествия</span>
+            <span class="interest-tag" contenteditable="true">ИИ технологии</span>
           </div>
         </div>
         
         <!-- Блок с контактами -->
         <div class="box contact-box">
-          <h3 class="contact-title">Контакты</h3>
-          <p class="contact-info">email: george.dev@example.com</p>
-          <p class="contact-info">phone: +7 (123) 456-78-90</p>
-          <p class="contact-info">telegram: @george_frontend</p>
-          <p class="contact-info">github: github.com/george-dev</p>
+          <h3 class="contact-title" contenteditable="true">Контакты</h3>
+          <p class="contact-info" contenteditable="true">email: george.dev@example.com</p>
+          <p class="contact-info" contenteditable="true">phone: +7 (123) 456-78-90</p>
+          <p class="contact-info" contenteditable="true">telegram: @george_frontend</p>
+          <p class="contact-info" contenteditable="true">github: github.com/george-dev</p>
         </div>
       </div>
     </div>
     
-    <!-- Кнопка скачивания - теперь точно в правом нижнем углу -->
-    <button class="download-btn ripple" id="download-pdf">Скачать PDF</button>
+    <button class="download-btn" id="download-pdf">Скачать PDF</button>
   </div>
 
-  <script>
-    // Функционал скачивания PDF
-    document.getElementById('download-pdf').addEventListener('click', function() {
-      const element = document.getElementById('resume-content');
-      const opt = {
-        margin: 10,
-        filename: 'Резюме_Георгия.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { 
-          scale: 2,
+  <!-- Подключаем библиотеки в конце body -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  
+ <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const downloadBtn = document.getElementById('download-pdf');
+
+    downloadBtn.addEventListener('click', async function () {
+      downloadBtn.disabled = true;
+      downloadBtn.textContent = 'Генерация PDF...';
+
+      try {
+        const resumeContent = document.getElementById('resume-content');
+
+        // Временно добавляем класс для "режима печати", чтобы всё выглядело как на экране
+        resumeContent.style.backgroundColor = '#ffffff';
+        document.body.classList.add('pdf-mode');
+
+        // Генерируем холст
+        const canvas = await html2canvas(resumeContent, {
+          scale: 3,                   // Высокое качество
+          useCORS: true,              // Поддержка внешних изображений
+          logging: false,
+          backgroundColor: '#ffffff', // Белый фон, если нет в CSS
           scrollX: 0,
           scrollY: 0,
-          windowWidth: document.getElementById('resume-content').scrollWidth,
-          windowHeight: document.getElementById('resume-content').scrollHeight
-        },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-      };
-      
-      // Скрываем кнопку перед генерацией PDF
-      const btn = document.getElementById('download-pdf');
-      btn.style.visibility = 'hidden';
-      
-      // Генерация PDF
-      html2pdf().from(element).set(opt).save().then(() => {
-        btn.style.visibility = 'visible';
+          windowWidth: resumeContent.scrollWidth,
+          windowHeight: resumeContent.scrollHeight
+        });
+
+        // Восстанавливаем исходный стиль
+        document.body.classList.remove('pdf-mode');
+
+        // Конвертируем в изображение
+        const imgData = canvas.toDataURL('image/png');
+
+        // Создаём PDF
+        const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+        const pdfWidth = 210;
+        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+        // Добавляем изображение
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+
+        // Сохраняем
+        pdf.save('Резюме_Георгия.pdf');
+
+      } catch (error) {
+        console.error('Ошибка при создании PDF:', error);
+        alert('Не удалось создать PDF. Попробуйте снова.');
+      } finally {
+        downloadBtn.disabled = false;
+        downloadBtn.textContent = 'Скачать PDF';
+      }
+    });
+
+    // Логика изменения прогресс-баров
+    document.querySelectorAll('.language-name').forEach(item => {
+      item.addEventListener('input', function () {
+        const progressBar = this.nextElementSibling;
+        if (this.textContent.toLowerCase().includes('рус')) {
+          progressBar.style.width = '100%';
+        } else if (this.textContent.toLowerCase().includes('англ')) {
+          progressBar.style.width = '80%';
+        } else {
+          progressBar.style.width = '90%';
+        }
       });
     });
-  </script>
+  });
+</script>
 </body>
 </html>
