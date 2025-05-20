@@ -182,72 +182,81 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   
  <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const downloadBtn = document.getElementById('download-pdf');
+ document.addEventListener('DOMContentLoaded', function () {
+  const downloadBtn = document.getElementById('download-pdf');
 
-    downloadBtn.addEventListener('click', async function () {
-      downloadBtn.disabled = true;
-      downloadBtn.textContent = 'Генерация PDF...';
+  downloadBtn.addEventListener('click', async function () {
+    if (!downloadBtn) return;
 
-      try {
-        const resumeContent = document.getElementById('resume-content');
+    downloadBtn.disabled = true;
+    downloadBtn.textContent = 'Генерация PDF...';
 
-        // Временно добавляем класс для "режима печати", чтобы всё выглядело как на экране
-        resumeContent.style.backgroundColor = '#ffffff';
-        document.body.classList.add('pdf-mode');
+    try {
+      const resumeContent = document.getElementById('resume-content');
 
-        // Генерируем холст
-        const canvas = await html2canvas(resumeContent, {
-          scale: 3,                   // Высокое качество
-          useCORS: true,              // Поддержка внешних изображений
-          logging: false,
-          backgroundColor: '#ffffff', // Белый фон, если нет в CSS
-          scrollX: 0,
-          scrollY: 0,
-          windowWidth: resumeContent.scrollWidth,
-          windowHeight: resumeContent.scrollHeight
-        });
+      // Добавляем класс для специальных стилей под печать
+      resumeContent.classList.add('pdf-export');
 
-        // Восстанавливаем исходный стиль
-        document.body.classList.remove('pdf-mode');
+      // Получаем высоту и ширину элемента
+      const { scrollWidth, scrollHeight } = resumeContent;
 
-        // Конвертируем в изображение
-        const imgData = canvas.toDataURL('image/png');
+      // Высокое качество + фиксируем фон
+      const canvas = await html2canvas(resumeContent, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#ffffff',
+        scrollX: 0,
+        scrollY: 0,
+        width: scrollWidth,
+        height: scrollHeight,
+        windowWidth: scrollWidth,
+        windowHeight: scrollHeight,
+        imageTimeout: 15000
+      });
 
-        // Создаём PDF
-        const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
-        const pdfWidth = 210;
-        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      // Убираем класс после отрисовки
+      resumeContent.classList.remove('pdf-export');
 
-        // Добавляем изображение
-        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      // Конвертируем холст в изображение
+      const imgData = canvas.toDataURL('image/png');
 
-        // Сохраняем
-        pdf.save('Резюме_Георгия.pdf');
+      // Создаём PDF с правильным соотношением
+      const pdf = new jspdf.jsPDF({
+        orientation: scrollWidth > scrollHeight ? 'l' : 'p',
+        unit: 'px',
+        format: [canvas.width, canvas.height]
+      });
 
-      } catch (error) {
-        console.error('Ошибка при создании PDF:', error);
-        alert('Не удалось создать PDF. Попробуйте снова.');
-      } finally {
-        downloadBtn.disabled = false;
-        downloadBtn.textContent = 'Скачать PDF';
+      // Добавляем изображение без потери качества
+      pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+
+      // Сохраняем файл
+      pdf.save('Резюме_Георгия.pdf');
+
+    } catch (error) {
+      console.error('Ошибка при создании PDF:', error);
+      alert('Не удалось создать PDF. Попробуйте снова.');
+    } finally {
+      downloadBtn.disabled = false;
+      downloadBtn.textContent = 'Скачать PDF';
+    }
+  });
+
+  // Логика прогресс-баров остаётся прежней
+  document.querySelectorAll('.language-name').forEach(item => {
+    item.addEventListener('input', function () {
+      const progressBar = this.nextElementSibling;
+      if (this.textContent.toLowerCase().includes('рус')) {
+        progressBar.style.width = '100%';
+      } else if (this.textContent.toLowerCase().includes('англ')) {
+        progressBar.style.width = '80%';
+      } else {
+        progressBar.style.width = '90%';
       }
     });
-
-    // Логика изменения прогресс-баров
-    document.querySelectorAll('.language-name').forEach(item => {
-      item.addEventListener('input', function () {
-        const progressBar = this.nextElementSibling;
-        if (this.textContent.toLowerCase().includes('рус')) {
-          progressBar.style.width = '100%';
-        } else if (this.textContent.toLowerCase().includes('англ')) {
-          progressBar.style.width = '80%';
-        } else {
-          progressBar.style.width = '90%';
-        }
-      });
-    });
   });
+});
 </script>
 </body>
 </html>
