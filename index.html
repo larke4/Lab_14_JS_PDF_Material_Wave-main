@@ -1,13 +1,99 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Интерактивное резюме | Георгий</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins :wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    /* Дополнительные стили для редактируемых полей */
+    /* Общие стили */
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f7fa;
+    }
+
+    .cv-container {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: white;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+    }
+
+    .bentoFlexbox {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .box {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 20px;
+      position: relative;
+    }
+
+    .profile-img {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 10px;
+    }
+
+    .name-box h1 {
+      margin: 5px 0;
+      font-size: 2rem;
+    }
+
+    .role {
+      color: #28D979;
+      font-weight: 500;
+    }
+
+    .language {
+      margin-bottom: 10px;
+    }
+
+    .progress-bar {
+      height: 6px;
+      background: #28D979;
+      border-radius: 3px;
+      transition: width 0.4s ease;
+    }
+
+    .job-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .job-role {
+      margin: 8px 0 4px;
+    }
+
+    .tool-icon {
+      width: 24px;
+      height: 24px;
+      margin: 4px;
+      object-fit: contain;
+    }
+
+    .interest-tag {
+      display: inline-block;
+      background: #e0f7ef;
+      padding: 5px 12px;
+      margin: 5px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+
+    .contact-title {
+      margin-top: 0;
+    }
+
     [contenteditable="true"] {
       border-bottom: 1px dashed #ccc;
       padding: 2px 4px;
@@ -16,13 +102,13 @@
       min-width: 50px;
       display: inline-block;
     }
-    
+
     [contenteditable="true"]:focus {
       outline: none;
       background: rgba(40, 217, 121, 0.1);
       border-bottom: 2px solid #28D979;
     }
-    
+
     .download-btn {
       position: fixed;
       right: 30px;
@@ -39,22 +125,42 @@
       transition: all 0.3s ease;
       z-index: 1000;
     }
-    
+
     .download-btn:hover {
       background: #1fb863;
       transform: translateY(-2px);
       box-shadow: 0 6px 16px rgba(0,0,0,0.2);
     }
-    
-    .progress-bar {
-      transition: width 0.5s ease;
-    }
 
-    .tool-icon {
-      width: 24px;
-      height: 24px;
-      margin: 4px;
-      object-fit: contain;
+    /* Стили для экспорта в PDF */
+    @media print, screen {
+      .pdf-export {
+        width: auto !important;
+        min-width: 100%;
+        box-shadow: none !important;
+        transform: none !important;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+      }
+
+      .cv-container {
+        background-color: #fff !important;
+      }
+
+      body.pdf-mode {
+        background-color: #fff;
+      }
+
+      [contenteditable="true"]:focus {
+        outline: none;
+        background: transparent;
+        border-bottom: 2px solid #28D979;
+      }
+
+      .tool-icon {
+        object-fit: contain;
+        opacity: 1 !important;
+      }
     }
   </style>
 </head>
@@ -64,14 +170,14 @@
       <div class="bentoFlexbox">
         <!-- Блок с фото -->
         <div class="box profile-img" style="background-image: url('./assets/foto.jpg')" contenteditable="false"></div>
-        
+
         <!-- Блок с именем -->
         <div class="box name-box">
           <p class="greeting" contenteditable="true">Привет, я</p>
           <h1 class="name" contenteditable="true">Георгий</h1>
           <p class="role" contenteditable="true">Frontend Developer</p>
         </div>
-        
+
         <!-- Блок с языками -->
         <div class="box languages-box">
           <h3 class="box-title" contenteditable="true">Языки</h3>
@@ -88,7 +194,7 @@
             <div class="progress-bar" style="width: 90%"></div>
           </div>
         </div>
-        
+
         <!-- Блок с опытом работы -->
         <div class="box experience-box">
           <h3 class="box-title" contenteditable="true">Опыт работы</h3>
@@ -112,7 +218,7 @@
             <p class="job-company" contenteditable="true">Студия "ДизайнВеб"</p>
           </div>
         </div>
-        
+
         <!-- Блок с инструментами -->
         <div class="box tools-box">
           <h3 class="box-title" contenteditable="true">Инструменты</h3>
@@ -132,7 +238,7 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Блок с образованием -->
         <div class="box education-box">
           <h3 class="box-title" contenteditable="true">Образование</h3>
@@ -150,7 +256,7 @@
             <h4 class="job-role" contenteditable="true">Магистр Веб-технологий</h4>
           </div>
         </div>
-        
+
         <!-- Блок с интересами -->
         <div class="box interests-box">
           <h3 class="box-title" contenteditable="true">Интересы</h3>
@@ -162,7 +268,7 @@
             <span class="interest-tag" contenteditable="true">ИИ технологии</span>
           </div>
         </div>
-        
+
         <!-- Блок с контактами -->
         <div class="box contact-box">
           <h3 class="contact-title" contenteditable="true">Контакты</h3>
@@ -173,90 +279,89 @@
         </div>
       </div>
     </div>
-    
+
     <button class="download-btn" id="download-pdf">Скачать PDF</button>
   </div>
 
-  <!-- Подключаем библиотеки в конце body -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  
- <script>
- document.addEventListener('DOMContentLoaded', function () {
-  const downloadBtn = document.getElementById('download-pdf');
+  <!-- Подключаем библиотеки -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js "></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js "></script>
 
-  downloadBtn.addEventListener('click', async function () {
-    if (!downloadBtn) return;
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const downloadBtn = document.getElementById('download-pdf');
 
-    downloadBtn.disabled = true;
-    downloadBtn.textContent = 'Генерация PDF...';
+      downloadBtn.addEventListener('click', async function () {
+        if (!downloadBtn) return;
 
-    try {
-      const resumeContent = document.getElementById('resume-content');
+        downloadBtn.disabled = true;
+        downloadBtn.textContent = 'Генерация PDF...';
 
-      // Добавляем класс для специальных стилей под печать
-      resumeContent.classList.add('pdf-export');
+        try {
+          const resumeContent = document.getElementById('resume-content');
 
-      // Получаем высоту и ширину элемента
-      const { scrollWidth, scrollHeight } = resumeContent;
+          // Добавляем класс для специальных стилей под печать
+          resumeContent.classList.add('pdf-export');
 
-      // Высокое качество + фиксируем фон
-      const canvas = await html2canvas(resumeContent, {
-        scale: 2,
-        useCORS: true,
-        logging: false,
-        backgroundColor: '#ffffff',
-        scrollX: 0,
-        scrollY: 0,
-        width: scrollWidth,
-        height: scrollHeight,
-        windowWidth: scrollWidth,
-        windowHeight: scrollHeight,
-        imageTimeout: 15000
+          // Получаем размеры контента
+          const { scrollWidth, scrollHeight } = resumeContent;
+
+          // Рендерим canvas
+          const canvas = await html2canvas(resumeContent, {
+            scale: 2,
+            useCORS: true,
+            logging: false,
+            backgroundColor: '#ffffff',
+            scrollX: 0,
+            scrollY: 0,
+            width: scrollWidth,
+            height: scrollHeight,
+            windowWidth: scrollWidth,
+            windowHeight: scrollHeight
+          });
+
+          // Убираем класс после отрисовки
+          resumeContent.classList.remove('pdf-export');
+
+          // Конвертируем в изображение
+          const imgData = canvas.toDataURL('image/png');
+
+          // Создаём PDF
+          const pdf = new jspdf.jsPDF({
+            orientation: scrollWidth > scrollHeight ? 'l' : 'p',
+            unit: 'px',
+            format: [canvas.width, canvas.height]
+          });
+
+          // Добавляем изображение
+          pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+
+          // Сохраняем
+          pdf.save('Резюме_Георгия.pdf');
+
+        } catch (error) {
+          console.error('Ошибка при создании PDF:', error);
+          alert('Не удалось создать PDF. Попробуйте снова.');
+        } finally {
+          downloadBtn.disabled = false;
+          downloadBtn.textContent = 'Скачать PDF';
+        }
       });
 
-      // Убираем класс после отрисовки
-      resumeContent.classList.remove('pdf-export');
-
-      // Конвертируем холст в изображение
-      const imgData = canvas.toDataURL('image/png');
-
-      // Создаём PDF с правильным соотношением
-      const pdf = new jspdf.jsPDF({
-        orientation: scrollWidth > scrollHeight ? 'l' : 'p',
-        unit: 'px',
-        format: [canvas.width, canvas.height]
+      // Логика изменения прогресс-баров
+      document.querySelectorAll('.language-name').forEach(item => {
+        item.addEventListener('input', function () {
+          const progressBar = this.nextElementSibling;
+          if (this.textContent.toLowerCase().includes('рус')) {
+            progressBar.style.width = '100%';
+          } else if (this.textContent.toLowerCase().includes('англ')) {
+            progressBar.style.width = '80%';
+          } else {
+            progressBar.style.width = '90%';
+          }
+        });
       });
-
-      // Добавляем изображение без потери качества
-      pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
-
-      // Сохраняем файл
-      pdf.save('Резюме_Георгия.pdf');
-
-    } catch (error) {
-      console.error('Ошибка при создании PDF:', error);
-      alert('Не удалось создать PDF. Попробуйте снова.');
-    } finally {
-      downloadBtn.disabled = false;
-      downloadBtn.textContent = 'Скачать PDF';
-    }
-  });
-
-  // Логика прогресс-баров остаётся прежней
-  document.querySelectorAll('.language-name').forEach(item => {
-    item.addEventListener('input', function () {
-      const progressBar = this.nextElementSibling;
-      if (this.textContent.toLowerCase().includes('рус')) {
-        progressBar.style.width = '100%';
-      } else if (this.textContent.toLowerCase().includes('англ')) {
-        progressBar.style.width = '80%';
-      } else {
-        progressBar.style.width = '90%';
-      }
     });
-  });
-});
-</script>
+  </script>
 </body>
 </html>
